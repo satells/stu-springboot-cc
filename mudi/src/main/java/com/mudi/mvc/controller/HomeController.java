@@ -5,33 +5,67 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mudi.mvc.model.Pedido;
+import com.mudi.mvc.model.StatusPedido;
 import com.mudi.mvc.repository.PedidoRepository;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
-	@GetMapping("/home")
+	@GetMapping()
 	public String home(Model model) {
-
-//		Pedido pedido = new Pedido();
-//		pedido.setNomeProduto("Kindle Paperwhite");
-//
-//		pedido.setUrlProduto("https://www.amazon.com/-/pt/dp/B07F7TLZF4/ref=sr_1_1?dchild=1&keywords=kindle&qid=1634754665&qsid=136-1905245-3812915&sr=8-1&sres=B07F7TLZF4%2CB07746ZX4Y%2CB07HSL23CW%2CB07741S7Y8%2CB07F81WWKP%2CB09FP334NK%2CB07L55RMVF%2CB075QRWPPJ%2CB07L5GDTYY%2CB077448K76%2CB0774DBGT2%2CB09FNJZD68%2CB09FBYNC2J%2CB079BG3LQF%2CB0898T63S8%2CB07HZQBBKL");
-//		pedido.setUrlImagem("https://m.media-amazon.com/images/I/51+TWOfdtiL._AC_SL1000_.jpg");
-//		pedido.setDescricao("Kindle Paperwhite – (previous generation - 2018 release) Now Waterproof with 2x the Storage - 8 GB (International Version)");
-//
-//		List<Pedido> pedidos = Arrays.asList(pedido);
 		List<Pedido> pedidos = pedidoRepository.findAll();
-
 		model.addAttribute("pedidos", pedidos);
-
 		return "home";
 	}
 
+//	@GetMapping("/aguardando")
+//	public String aguardando(Model model) {
+//		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.AGUARDANDO);
+//		model.addAttribute("pedidos", pedidos);
+//		return "home";
+//	}
+//
+//	@GetMapping("/aprovado")
+//	public String aprovado(Model model) {
+//		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.APROVADO);
+//		model.addAttribute("pedidos", pedidos);
+//		return "home";
+//	}
+//
+//	@GetMapping("/entregue")
+//	public String entregue(Model model) {
+//		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE);
+//		model.addAttribute("pedidos", pedidos);
+//		return "home";
+//	}
+//
+//	@GetMapping("/todos")
+//	public String todos(Model model) {
+//		List<Pedido> pedidos = pedidoRepository.findAll();
+//		model.addAttribute("pedidos", pedidos);
+//		return "home";
+//	}
+
+	@GetMapping("/{status}")
+	public String status(@PathVariable("status") String status, Model model) {
+		List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.valueOf(status.toUpperCase()));
+		model.addAttribute("pedidos", pedidos);
+		model.addAttribute("status", status);
+		return "home";
+	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public String onError() {
+		return "redirect:/home";
+	}
 }

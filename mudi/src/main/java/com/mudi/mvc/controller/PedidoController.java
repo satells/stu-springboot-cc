@@ -37,6 +37,6 @@ public class PedidoController {
 		Long id = pedidoRepository.save(pedido).getId();
 		System.out.println(id);
 
-		return "pedido/formulario";
+		return "redirect:/home";
 	}
 }
