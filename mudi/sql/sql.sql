@@ -1,9 +1,15 @@
-﻿
+﻿select * from pedido
+
+select * from users
+/*
+
 drop table authorities;
 
 
 drop table users;
 
+
+select * from users
 
 
 create table users(
@@ -18,3 +24,6 @@ create table authorities (
     constraint fk_authorities_users foreign key(username) references users(username)
 );
 create unique index ix_auth_username on authorities (username,authority);
+
+*/
+update pedido set user_username = 'mauro'
