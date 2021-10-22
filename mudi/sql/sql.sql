@@ -26,4 +26,5 @@ create table authorities (
 create unique index ix_auth_username on authorities (username,authority);
 
 */
-update pedido set user_username = 'mauro'
+update pedido set status='ENTREGUE' where id>50
+
