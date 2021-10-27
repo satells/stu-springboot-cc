@@ -16,7 +16,7 @@
 						th:classappend="${status}=='aprovado'?'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/aprovado}">Aprovado</a><a
 						th:classappend="${status}=='entregue'?'active'" class="nav-item nav-link" th:href="@{/usuario/pedido/entregue}">Entregue</a>
 				</div>
-				<a href="/pedido/formulario"><button
+				<a th:href="@{/pedido/formulario}"><button
 						class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
 			</nav>
 		</nav>

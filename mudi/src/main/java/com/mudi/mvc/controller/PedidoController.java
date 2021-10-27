@@ -28,18 +28,15 @@ public class PedidoController {
 
 	@GetMapping("formulario")
 	public String formulario(RequisicaoNovoPedido requisicao) {
-
 		return "pedido/formulario";
 	}
 
 	@PostMapping("novo")
-	public String novo(@Valid RequisicaoNovoPedido requisicao,
-			BindingResult result) {
+	public String novo(@Valid RequisicaoNovoPedido requisicao, BindingResult result) {
 		if (result.hasErrors()) {
 			return "pedido/formulario";
 		}
-		String username = SecurityContextHolder.getContext()
-				.getAuthentication().getName();
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
 		User user = userRepository.findByUsername(username);
 

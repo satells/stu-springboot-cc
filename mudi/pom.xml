@@ -12,6 +12,7 @@
 	<groupId>com.mudi.mvc</groupId>
 	<artifactId>mudi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+<packaging>war</packaging>
 	<name>mudi</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -61,7 +62,11 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
