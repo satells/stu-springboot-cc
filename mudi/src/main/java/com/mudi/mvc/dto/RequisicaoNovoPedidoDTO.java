@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import com.mudi.mvc.model.Pedido;
 import com.mudi.mvc.model.StatusPedido;
 
-public class RequisicaoNovoPedido {
+public class RequisicaoNovoPedidoDTO {
 
 	@NotBlank
 	private String nomeProduto;
